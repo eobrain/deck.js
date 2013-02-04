@@ -1,0 +1,81 @@
+$Ts: 500ms;
+$motion: cubic-bezier(1,0.1,0.1,1);
+
+@mixin translate($x: 0, $y: 0, $z: 0) {
+    -webkit-transform:translate3d($x, $y, $z);
+       -moz-transform:translate(  $x, $y);
+        -ms-transform:translate(  $x, $y);
+         -o-transform:translate(  $x, $y);
+            transform:translate3d($x, $y, $z);
+}
+
+.csstransitions.csstransforms {
+    overflow-x:hidden;
+    
+    .deck-container > .slide {
+        -webkit-transition:-webkit-transform $Ts $motion;
+           -moz-transition:   -moz-transform $Ts $motion;
+            -ms-transition:    -ms-transform $Ts $motion;
+             -o-transition:     -o-transform $Ts $motion;
+                transition:        transform $Ts $motion;
+    }
+    
+    .deck-container:not(.deck-menu) {
+        > .slide {
+            position:absolute;
+            top:0;
+            left:0;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+            width:100%;
+            padding:0 48px;
+            
+            .slide {
+                position:relative;
+                left:0;
+                top:0;
+                -webkit-transition:-webkit-transform $Ts $motion, opacity $Ts $motion;
+                   -moz-transition:   -moz-transform $Ts $motion, opacity $Ts $motion;
+                    -ms-transition:    -ms-transform $Ts $motion, opacity $Ts $motion;
+                     -o-transition:     -o-transform $Ts $motion, opacity $Ts $motion;
+                        transition:        transform $Ts $motion, opacity $Ts $motion;
+            }
+
+            .deck-next, .deck-after {
+                visibility:visible;
+                @include translate(200%);
+            }
+        }
+
+        > .deck-previous {
+            @include translate(-200%);
+        }
+
+        > .deck-before {
+            @include translate(-400%);
+        }
+
+        > .deck-next {
+            @include translate(200%);
+        }
+
+        > .deck-after {
+            @include translate(400%);
+        }
+        
+        > .deck-before, > .deck-previous {
+            .slide {
+                visibility:visible;
+            }
+        }
+
+        > .deck-child-current {
+            -webkit-transform:none;
+               -moz-transform:none;
+                -ms-transform:none;
+                 -o-transform:none;
+                    transform:none;
+        }
+    }
+}

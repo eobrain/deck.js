@@ -1,0 +1,10 @@
+The underlying software, deck.js, is used according to it's
+open-source license.
+
+All content (HTML and images) is copyright Hewlett-Packard 2013,
+authored by Eamonn O'Brien-Strain, except for some creatice-commons
+license images acknowledged in the slides.
+
+Any additional added code (CoffeeScript and SCSS) is copyright
+Hewlett-Packard 2013, except where it falls under the open-source
+license of the underlying deck.js system.
