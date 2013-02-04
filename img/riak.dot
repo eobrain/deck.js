@@ -1,0 +1,25 @@
+digraph G {
+  edge[color="/dark23/1", fontcolor="/dark23/1", dir=both ]
+  bgcolor="/pastel14/1"
+
+  client [shape=plaintext, label=""]
+
+  node[shape=record,style=filled, fillcolor=white]
+
+  client -> "Load Balancer" -> {
+    node[label="Riak\nBack-End"]
+    /*b1
+    b2*/
+    b3
+    b4
+    b5
+  }
+
+  edge [label=gossip, style=dashed, constraint=false]
+
+  /*b1 -> {b2;b3;b4;b5}
+  b2 -> {b3;b4;b5}*/
+  b3 -> {b4;b5}
+  b4 -> {b5}
+ 
+}

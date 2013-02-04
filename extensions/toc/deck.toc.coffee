@@ -1,7 +1,7 @@
 $ ->
 
   # Insert Table-of-Contents
-  $('.slide:first').after '''
+  $('section:first').after '''
     <section class="slide">
       <ol id="toc"/>
     </section>

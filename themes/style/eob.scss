@@ -1,0 +1,232 @@
+@font-face {
+    font-family: 'CantarellRegular';
+    src: url('eob-font/Cantarell-Regular-webfont.eot');
+    src: url('eob-font/Cantarell-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/Cantarell-Regular-webfont.woff') format('woff'),
+         url('eob-font/Cantarell-Regular-webfont.ttf') format('truetype'),
+         url('eob-font/Cantarell-Regular-webfont.svg#CantarellRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'CantarellOblique';
+    src: url('eob-font/Cantarell-Oblique-webfont.eot');
+    src: url('eob-font/Cantarell-Oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/Cantarell-Oblique-webfont.woff') format('woff'),
+         url('eob-font/Cantarell-Oblique-webfont.ttf') format('truetype'),
+         url('eob-font/Cantarell-Oblique-webfont.svg#CantarellOblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'CantarellBold';
+    src: url('eob-font/Cantarell-Bold-webfont.eot');
+    src: url('eob-font/Cantarell-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/Cantarell-Bold-webfont.woff') format('woff'),
+         url('eob-font/Cantarell-Bold-webfont.ttf') format('truetype'),
+         url('eob-font/Cantarell-Bold-webfont.svg#CantarellBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'CantarellBoldOblique';
+    src: url('eob-font/Cantarell-BoldOblique-webfont.eot');
+    src: url('eob-font/Cantarell-BoldOblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/Cantarell-BoldOblique-webfont.woff') format('woff'),
+         url('eob-font/Cantarell-BoldOblique-webfont.ttf') format('truetype'),
+         url('eob-font/Cantarell-BoldOblique-webfont.svg#CantarellBoldOblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('eob-font/BebasNeue-webfont.eot');
+    src: url('eob-font/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/BebasNeue-webfont.woff') format('woff'),
+         url('eob-font/BebasNeue-webfont.ttf') format('truetype'),
+         url('eob-font/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+@font-face {
+    font-family: 'LobsterTwoRegular';
+    src: url('eob-font/LobsterTwo-Regular-webfont.eot');
+    src: url('eob-font/LobsterTwo-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/LobsterTwo-Regular-webfont.woff') format('woff'),
+         url('eob-font/LobsterTwo-Regular-webfont.ttf') format('truetype'),
+         url('eob-font/LobsterTwo-Regular-webfont.svg#LobsterTwoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'LobsterTwoItalic';
+    src: url('eob-font/LobsterTwo-Italic-webfont.eot');
+    src: url('eob-font/LobsterTwo-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/LobsterTwo-Italic-webfont.woff') format('woff'),
+         url('eob-font/LobsterTwo-Italic-webfont.ttf') format('truetype'),
+         url('eob-font/LobsterTwo-Italic-webfont.svg#LobsterTwoItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'LobsterTwoBold';
+    src: url('eob-font/LobsterTwo-Bold-webfont.eot');
+    src: url('eob-font/LobsterTwo-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/LobsterTwo-Bold-webfont.woff') format('woff'),
+         url('eob-font/LobsterTwo-Bold-webfont.ttf') format('truetype'),
+         url('eob-font/LobsterTwo-Bold-webfont.svg#LobsterTwoBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'LobsterTwoBoldItalic';
+    src: url('eob-font/LobsterTwo-BoldItalic-webfont.eot');
+    src: url('eob-font/LobsterTwo-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('eob-font/LobsterTwo-BoldItalic-webfont.woff') format('woff'),
+         url('eob-font/LobsterTwo-BoldItalic-webfont.ttf') format('truetype'),
+         url('eob-font/LobsterTwo-BoldItalic-webfont.svg#LobsterTwoBoldItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+.deck-container {
+    font-family: CantarellRegular, sans-serif;
+    font-size:1.75em;
+    background:#fff;
+    padding: 0;
+
+    .slide {
+        
+        h1 {
+            font-family: BebasNeueRegular, sans-serif;
+            color:#000;
+        }
+
+        h2 {
+            font-family: BebasNeueRegular, sans-serif;
+            color:#c00;
+            border-bottom-color:#ccc;
+        }
+
+        h3 {
+            font-family: BebasNeueRegular, sans-serif;
+            color:#888;
+        }
+
+        strong {
+            font-family: BebasNeueRegular, serif;
+        }
+
+        em {
+            font-family: BebasNeueRegular, serif;
+        }
+
+        pre {
+            border-color:#ccc;
+        }
+
+        code {
+            color:#888;
+        }
+
+        blockquote {
+            font-size:2em;
+            font-style:italic;
+            padding:1em 2em;
+            color:#000;
+            border-left:5px solid #ccc;
+
+            p {
+                margin:0;
+            }
+
+            cite {
+                font-size:.5em;
+                font-style:normal;
+                font-weight:bold;
+                color:#888;
+            }
+        }
+
+        ::-moz-selection{ background:#c00; color:#fff; }
+        ::selection { background:#c00; color:#fff; }
+
+        a {
+            &, &:hover, &:focus, &:active, &:visited {
+                color:#c00;
+                text-decoration:none;
+            }
+
+            &:hover, &:focus {
+                text-decoration:underline;
+            }
+        }
+    }
+    
+    > .slide {
+        padding: 0 48px;
+        background:#fff;
+        .deck-before, .deck-previous {
+            opacity:0.4;
+            
+            &:not(.deck-child-current) {
+                .deck-before, .deck-previous {
+                    opacity:1;
+                }
+            }
+        }
+        
+        .deck-child-current {
+            opacity:1;
+        }
+    } 
+    
+    .deck-prev-link, .deck-next-link {
+        background:#ccc;
+        font-family:serif; // sans-serif arrows x-browser fail
+        
+        &, &:hover, &:focus, &:active, &:visited {
+            color:#fff;
+        }
+        
+        &:hover, &:focus {
+            background:#c00;
+            text-decoration:none;
+        }
+    }
+    
+    .deck-status {
+        font-size:0.6666em;
+    }
+    
+    &.deck-menu {
+        .slide {
+            background:#eee;
+        }
+        
+        .deck-current, .no-touch & .slide:hover {
+            background:#ddf;
+        }
+    }
+}

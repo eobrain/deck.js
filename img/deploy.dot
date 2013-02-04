@@ -1,0 +1,43 @@
+digraph G {
+
+  node [style=filled, fillcolor="/pastel14/1"]
+  edge[color="/dark23/1", fontcolor="/dark23/1" ]
+  graph[color="/dark23/3", fontcolor="/dark23/3" ]
+
+  subgraph cluster_corp {
+    label="Corporate Intranet"
+    {
+      node [shape=plaintext, style=""]
+      "Operations Engineer"
+    }
+    "Deployment\nScripts"
+  }
+
+  subgraph cluster_cloud {
+    label="Elastic Cloud"
+    "Console" [style=""]
+    node[shape=rect]
+    "API\nCluster"
+    "Compute\nCluster"
+  }
+
+  subgraph cluster_cdn {
+    label="Content\nDistribution\nNetwork"
+    "UI Code"
+  }
+
+  "Operations Engineer" -> "Deployment\nScripts"
+  "Operations Engineer" -> Console [dir=both]
+
+  {
+    "Deployment\nScripts" -> {
+      label="Elastic Cloud"
+      "API\nCluster"
+      "Compute\nCluster"
+    } [label="spin up"]
+
+    Console -> { "API\nCluster"; "Compute\nCluster" } [dir=both]
+
+    "Deployment\nScripts" -> "UI Code"  [label=push]
+  }
+}

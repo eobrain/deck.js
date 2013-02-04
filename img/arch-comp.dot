@@ -1,0 +1,64 @@
+digraph G {
+
+  {
+    node [shape=plaintext]
+    "End User"
+  }
+
+
+  node [style=filled, fillcolor="/pastel14/1"]
+  edge[color="/dark23/1", fontcolor="/dark23/1" ]
+  graph[color="/dark23/3", fontcolor="/dark23/3" ]
+
+
+  "3rd Party Website" [shape=record, fillcolor=white, color="/dark23/3", fontcolor="/dark23/3" ]
+
+  subgraph cluster_corp {
+    label="Corporate Intranet"
+    {
+      node [shape=plaintext, style=""]
+      "Operations Engineer"
+    }
+    "Deployment\nScripts"
+  }
+
+
+  subgraph cluster_cloud {
+    label="Elastic Cloud"
+    node[shape=rect]
+    "API\nCluster"
+    "Compute\nCluster"
+    "Storage\nCluster"
+  }
+
+
+  subgraph cluster_browser {
+    label="Browser or Mobile App"
+    "Clipping\nUI"
+    "Scrapbooks\nUI"
+  }
+
+  {
+    node[shape=rect]
+    "Clipping\nUI"      -> "API\nCluster"      [label=REST]
+    "Scrapbooks\nUI"    -> "API\nCluster"     [dir=back, label=REST]
+    "Scrapbooks\nUI"    -> "Compute\nCluster" [dir=both, label=REST]
+    "API\nCluster"      -> "Storage\nCluster" [dir=both]
+  }  
+  "Clipping\nUI"      -> "3rd Party Website" [dir=back, label=HTML]
+
+
+  "End User" -> "Clipping\nUI"
+  "End User" -> "Scrapbooks\nUI"  [dir=both]
+  "Operations Engineer" -> "Deployment\nScripts"
+
+  {
+    "Deployment\nScripts" -> {
+      label="Elastic Cloud"
+      node[shape=rect]
+      "API\nCluster"
+      "Compute\nCluster"
+    } [style=invis]
+  }
+
+}

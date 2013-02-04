@@ -1,0 +1,36 @@
+digraph G {
+
+  node[style=filled,shape=record]
+  edge[dir=none]
+
+ 
+  node[fillcolor="/pastel14/1"]
+  zh_button      [label="Coffeescript\nJQuery\nClipping Button"]
+  jsmags         [label="Coffeescript\nJQuery\nScrapbooks Management UI"]
+  "api-js-client"[label="Coffeescript\nJQuery\nClient Library for REST API"]
+  
+  {jsmags;zh_button} -> "api-js-client" 
+
+  node[fillcolor="/pastel14/2"]
+  clippings       [label="Java\nPlay Framework\nAPI Server"]
+  keyval          [label="Java\nLibrary\nWrapper around Riak Key-Value Storage"]
+  funshort        [label="Java\nPlay Framework\nComputation Container"]
+  "webthunk-sdk"  [label="Java\nLibrary\nComputation Library"]
+  funshortplugins [label="Java\nLibrary\nComputation Functions"]
+  "api-js-client" -> clippings -> keyval
+  jsmags -> funshort -> "webthunk-sdk"
+  funshort -> funshortplugins -> "webthunk-sdk"
+
+  node[fillcolor="/pastel14/3"]
+  "webthunk-php" [label="PHP\nApache\nComputation Framework and Modules"]
+  clippings -> "webthunk-php"
+
+
+  node[fillcolor="/pastel14/4"]
+  AWS [label="Script\nDeploy"] 
+
+  AWS -> {clippings;jsmags;zh_button}
+  AWS -> funshort
+  AWS -> "webthunk-php"
+
+}

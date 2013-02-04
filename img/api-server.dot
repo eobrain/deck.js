@@ -1,0 +1,48 @@
+digraph G {
+
+  edge[color="/dark23/1", fontcolor="/dark23/1", dir=both ]
+  bgcolor="/pastel14/1"
+
+  {
+     bgcolor=white
+     node[label="HTTP",shape=plaintext]
+
+     h1;h2;h3;h4
+  }
+
+  Riak [shape=plaintext,label="Storage Cluster"]
+
+  subgraph cluster_backend {
+     label="API Server Backend"
+     style=filled
+     color=white
+     node[style=filled, fillcolor="/pastel14/2"]
+    {
+      node[label="controller"]
+      c1;c2;c3;c4
+    }
+    {
+      node[label="model"]
+      m1;m2;m3;m4;m5
+    }
+
+    c1 -> m1
+    c1 -> m5
+    c1 -> m2
+    c2 -> m2
+    c2 -> m1
+    c2 -> m4
+    c3 -> m3
+    c3 -> m2
+    c4 -> m4
+    
+  }
+
+  h1 -> c1
+  h2 -> c2
+  h3 -> c3
+  h4 -> c4
+
+  {m1;m2;m3;m4;m5} -> Riak
+
+}

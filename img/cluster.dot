@@ -1,0 +1,18 @@
+digraph G {
+  edge[color="/dark23/1", fontcolor="/dark23/1", dir=both ]
+  bgcolor="/pastel14/1"
+
+  client [shape=plaintext, label=""]
+  edge [label=HTTP]
+
+  node[shape=record,style=filled, fillcolor=white]
+
+  client -> "Load Balancer" -> {
+    b1 [label="Back-End"]
+    b2 [label="Back-End"]
+    b3 [label="Back-End"]
+    b4 [label="Back-End"]
+    b5 [label="Back-End"]
+  }
+ 
+}

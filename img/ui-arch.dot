@@ -1,0 +1,31 @@
+digraph G {
+
+  node[shape=record,style=filled]
+  edge[dir=none]
+
+
+  sys [fillcolor="/pastel14/3",label="{System Area|bookmarks\lsetttings\l...\l}"]
+
+  webctl [fillcolor="/pastel14/3",label="{Web Page Controls|back/forward button\lhome button\l...\l}"]
+
+  Browser [fillcolor="/pastel14/3"]
+
+
+  web [fillcolor="/pastel14/1",label="{Web Page|main web view}"]
+
+  subgraph cluster_clipper {
+    label="Clipper Code"
+    clip [fillcolor="/pastel14/1",label="{Clipping Action (JavaScript)|DOM Analysis\lDOM Manipulation\lCloud upload\l...}"]
+
+    sc [fillcolor="/pastel14/1",label="{Scrapbooks UI\n(JavaScript/Enyo in ancilliary web view)|Cloud download\ldisplay scrapbooks\lnavigate between and in scrapbooks\lmanipulate clippings\l...\l}"]
+
+    clipctl [fillcolor="/pastel14/3",label="{Clipping Invocation|drag\lcontext menu\l...\l}"]
+
+  }
+
+  
+  Browser ->  sys -> clipctl ->clip
+  Browser -> webctl -> web
+  Browser -> sc 
+
+}

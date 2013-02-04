@@ -1,0 +1,36 @@
+digraph G {
+
+
+  {
+    node [shape=plaintext]
+    "End User"
+  }
+
+
+  node [style=filled, fillcolor="/pastel14/1"]
+  edge[color="/dark23/1", fontcolor="/dark23/1" ]
+  graph[color="/dark23/3", fontcolor="/dark23/3" ]
+
+ 
+
+
+  subgraph cluster_cdn {
+    label="Content Distribution Network"
+    "UI Code"
+  }
+
+  "Elastic Cloud" [shape=record, fillcolor=white, color="/dark23/3", fontcolor="/dark23/3" ]
+
+  subgraph cluster_browser {
+    label="Browser or Mobile App"
+    "Clipping Scrapbooks UI"
+  }
+
+  "Clipping Scrapbooks UI"    -> "Elastic Cloud"     [dir=both, label="HTTP (CORS headers)"]
+
+  {"Clipping Scrapbooks UI"} -> "UI Code" [label=HTTP, dir=back, style=dashed]
+
+  "End User" -> "Clipping Scrapbooks UI"  [dir=both]
+
+
+}

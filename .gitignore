@@ -1,10 +1,13 @@
-.DS_Store
-.sass-cache/
-progress/
 *~
+.DS_Store
 extensions/bg/deck.bg.css
 extensions/bg/deck.bg.js
+extensions/toc/deck.toc.js
 extensions/toc/grid.toc.js
+index.css
 index.js
+progress/
+.sass-cache/
+themes/style/eob.css
 themes/style/swiss-eob.css
 themes/transition/horizontal-slide-eob.css

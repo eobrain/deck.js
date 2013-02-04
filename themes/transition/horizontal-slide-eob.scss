@@ -21,6 +21,7 @@ $motion: cubic-bezier(1,0.1,0.1,1);
     }
     
     .deck-container:not(.deck-menu) {
+        /* Inner slide elements */
         > .slide {
             position:absolute;
             top:0;
@@ -49,7 +50,7 @@ $motion: cubic-bezier(1,0.1,0.1,1);
         }
 
         > .deck-previous {
-            @include translate(-200%);
+            /*@include translate(-200%);*/
         }
 
         > .deck-before {
