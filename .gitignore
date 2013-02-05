@@ -11,3 +11,14 @@ progress/
 themes/style/eob.css
 themes/style/swiss-eob.css
 themes/transition/horizontal-slide-eob.css
+img/api-server.png
+img/arch-comp.png
+img/cluster.png
+img/deploy.png
+img/model.png
+img/modules.png
+img/riak.png
+img/ui-arch.png
+img/ui-local.png
+img/ui-remote.png
+img/*.png_icon

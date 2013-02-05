@@ -24,11 +24,12 @@ digraph G {
 
 
   subgraph cluster_cloud {
-    label="Elastic Cloud"
+    label="Infrastructure Cloud"
     node[shape=rect]
+    node[image="cluster.png_icon"]
     "API\nCluster"
     "Compute\nCluster"
-    "Storage\nCluster"
+    "Storage\nCluster" [image="riak.png_icon"]
   }
 
 

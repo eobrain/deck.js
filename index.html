@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=1024, user-scalable=no">
     
-    <title>Building an internet-scale web clipping system</title>
+    <title>Building an Internet-scale web clipping system</title>
     
     <!-- Required stylesheet -->
     <link rel="stylesheet" href="core/deck.core.css">
@@ -36,437 +36,303 @@
     
     <!-- Begin slides. Just make elements with a class of slide. -->
     
+
     <section>
       <h1>Building an Internet-Scale Web Clipping System</h1>
-      <h3>Eamonn O'Brien-Strain</h3>
+      <h3>A Case study, by Eamonn O'Brien-Strain</h3>
     </section>
-    
+
+
     <section>
-      <h2>HP Clipper</h2>
-      <h3>The thing we built</h3>
-      <blockquote>a browser add-on for collecting, organizing, and
-      using clippings of web content</blockquote>
-      <p>You can try it
-      at <a href="http://www.hpclipper.com/">http://www.hpclipper.com/</a></p>
+      <h3>Goal of this talk</h3>
+      <ul>
+        <li>So you have some amazing <em>algorithms</em> ...</li>
+        <li>So you have a great idea for an application targeted at
+          <em>millions</em> of users ...</li>
+        <li>But you are a bit hazy about this whole <em>cloud</em> thing ...</li>
+      </ul>
+      <blockquote>Explain by Example how to build cloud application</blockquote>
     </section>
+
     
     <section data-bg="LOGO2.0 part I and II by Ludwig Gatzke.jpg">
-      <h2>Why would a user want such a thing?</h2>
+      <h2>User Problem</h2>
       <h3>The Web is a big place</h3>
       <ul>
         <li>How to track and organize the useful stuff I
           find?</li>
         <li>How to get back to an old page?  Maybe it's
-        deleted? </li>
-        <li>How do I share what I found privately.</li>
+          deleted? </li>
+        <li>How do I share what I found privately?</li>
       </ul>
-      <!--img src="img/LOGO2.0 part I and II by Ludwig Gatzke.jpg"/-->
     </section>
     
-    <section data-bg="rack.png">
-      <h3>Browsing Collected Clippings</h3>
 
-      <p>After many clippings from the Web, can organize them into
-        <em>scrapbooks</em> for
-        easier <em>reading</em>
-        and <em>sharing</em>.</p>
-
+    <section>
+      <h3>HP Clipper</h3>
+      <blockquote>a browser add-on for collecting, organizing, and
+        using clippings of web content</blockquote>
+      <p>You can try it
+        at <a href="http://www.hpclipper.com/">http://www.hpclipper.com/</a></p>
     </section>
+
+
+    <section data-contain="modal.png">
+    </section>
+
+    
+    <section data-contain="clipping.png">
+    </section>
+    
+    
+    <section data-contain="rack.png">
+    </section>
+
     
     <section>
-      <h2>Origin</h2>
-
+      <h3>Originated in HP Labs</h3>
       Clipper ...
       <ul>
-        <li>originated in <em>HP Labs</em></li>
-        <li>builds upon the <em>Smart Print</em> technology
+        <li>builds upon the <em>Smart Print</em> algorithms
           (that cleans up web pages for a better printing).</li>
-        <li>adds to Smart Print, a
-          <em>client-only</em> browser add-on</li>
         <li>adds the capability to save the cleaned-up web
           page <em>in the cloud</em>. </li>
       </ul>
-
     </section>
 
+
     <section data-bg="Melbourne Sound Relief - Raincoat Brigade by alexkess.jpg">
-      <h2>We must handle large crowds of users</h2>
+      <h3>Must handle large crowds of users</h3>
       <ul>
         <li>Everyone surfing the web is a potential user.</li>
-        <li>Our architecure should have flexibility to handle
-        Internet-Scale.</li>
+        <li>Our architecture should have flexibility to handle
+          Internet-scale.</li>
         <li>But is should be economical as we ramp up from small base.</li>
       </ul>
     </section>
+
     
     <section>
-      <img class="slide" src="img/arch-comp.png"/>
-      <h2>Dataflow View of Our System</h2>
-      <p>System arranged into clusters of servers.</p>
+      <h2>What are Public Clouds?</h2>
+      Three levels:
+      <ol>
+        <li><strong>Application</strong> end-user web or mobile
+          service.  Used by <em>everyone</em></li>
+        <li><strong>Platform</strong> deployment and
+          execution environment for some particular software
+          framework. Used by <em>software engineers</em></li>
+        <li><strong>Infrastructure</strong> virtual hardware and
+          network resources. Used by <em>deployment and
+          operations engineers</em></li>
+      </ol>
     </section>
 
+    
+    <section>
+      <h3>We built upon a public Infrastructure Cloud</h3>
+      <p>Public release will be on HP Public Cloud. (Comparable to
+        Amazon Web Services.)</p>
+      <ul>
+        <li>Pay for just what you use.</li>
+        <li>Get started or pivot very quickly (e.g lean start-up or
+        agile development).</li>
+        <li>But ... at very large scale, likely to be more expensive than a
+        private solution.</li>
+      </ul>
+    </section>
 
     <section>
-      <h3>Inside a Cluster</h3>
       <img class="slide" src="img/cluster.png"/>
-      <p>Each cluster in the elastic cloud has a load
-        balancer in front of a parallel set of back-end
-        servers.</p>
+      <h3>Architectural Pattern:</h3><h4>Horizontally-Scalable Stateless Back-ends</h4>
+      <ul class="slide">
+        <li><em>Load balancer</em> distributes HTTP requests amongst
+        back-end servers</li>
+        <li><em>identical</em> back-ends</li>
+        <li><em>stateless</em> back-ends: HTTP requests spray
+        arbitrarily</li>
+        <li><em>virtual instances</em> in an
+        infrastructure cloud</li>
+        <li><em>spin-up</em> new instances when demand increase</li>
+        <li><em>spin-down</em> instances when demand reduces</li>
+      </ul>
     </section>  
 
 
     <section>
-      <h3>Riak Cluster</h3>
       <img class="slide" src="img/riak.png"/>
-      <p>In the storage cluster there is no <q>master</q>.
-        All the back-ends are equal peers, sharing data
-        amongst themselves and handling adding and removing
-        of peers.</p>
+      <h3>Architectural Pattern:</h3><h4>Horizontally-Scalable
+      Storage Cluster of NoSQL Peers</h4>
+      <ul>
+        <li>no <q>master</q>: all the back-ends are equal peers</li>
+        <li>sharing data amongst themselves with redundancy</li>
+        <li>automatically handles adding and removing of peers.</li>
+      </ul>
+      <p>(We use Riak.)</p>
     </section>
+
+
+    <section>
+      <h3>Operations Pattern:</h3><h4>Throw-Away Instances</h4>
+      Pattern:
+      <ul>
+        <li>never modify a server once it has been deployed</li>
+        <li>instead spin-up new instance and terminate old one</li>
+      </ul>
+      <br/>
+      Advantages:
+      <ul>
+        <li>can button-down security tightly (no shell login)</li>
+        <li>don't have to write upgrade scripts</li>
+        <li>never dependent on any particular instances</li>
+        <li>avoid <q>software rot</q></li>
+      </ul>
+    </section>
+
 
     <section>
       <img class="slide" src="img/deploy.png"/>
-      <h2>Deploying to the Cloud</h2>
-      <p>Integrated DevOps, deploying to the cloud using scripts.</p>
+      <h3>Dev-Ops: Turning Operations into Code</h3>
+      <p>deploying to the cloud using scripts</p>
+      <p>minimal of manual involvement in deploying code</p>
+      scripts to 
+      <ol>
+        <li>spin-up server</li>
+        <li>install dependencies</li>
+        <li>install our software</li>
+        <li>start our software running</li>
+      </ol>
     </section>
 
-    <section>
-      <h2>Deployment Architecture</h2>
-      
-      <p>We designed the clipper is architecture for scalable
-        deployment in an elastic cloud where we can scale the
-        clusters arbitrarily by adding instances.</p>
-      
-      
-      <p>Clipper has the following architectural components:
-        <dl>
-          
-          <dt>API Cluster</dt><dd>provides the JSON/REST/HTTP API
-            that is the main entry point into the cloud part of
-            Clipper. It has a set of parallel Play Framework servers
-            behind a load balancer.</dd>
-          
-          <dt>Storage Cluster</dt><dd>stores the clippings
-            and associated metadata in a set of Riak key-value
-            storage servers behind a load balancer.</dd>
-          
-          <dt>Compute Clusters</dt><dd>provide computation as
-            a simple stateless HTTP/REST service. One cluster is a
-            set of parallel Play Framework servers, the other is a
-            set of parallel LAMP servers -- each behind a load
-            balancer.</dd>
-          
-          <dt>Clipping UI</dt><dt>Scrapbooks UI</dt><dd>are the
-            JavaScript/CSS/HTML4 DOM analysis and user interfaces
-            for performing the clippings and for viewing the
-            scrapbooks.  The code can be deployed in the cloud
-            statically for delivery via a CDN, or it can be deployed
-            directly on the client, whether a desktop browser or a
-            mobile device.</dd>
-          
-          <dt>Analytics Queue</dt><dd>collects events for offline
-            analytics.</dd>
-          
-          <dt>Analytics DB</dt><dd>accumulates all
-            analytics events.</dd>
-          
-        </dl>
-        
-      </p>
-    </section>
-
-    <section>
-      <h3>Elastic Cloud</h3>
-
-      <p>All cloud components are deployed in an Elastic cloud.
-        We are moving from the Amazon Web Services cloud the the HP
-        Public Cloud.</p>
-      
-      <p>There is a minimal of manual involvement in deploying
-        code to the cloud.  We follow a DevOps style where as much
-        as possible is automated, so that most of <q>operations</q>
-        is implemented by coding.</p>
-      
-      <p>We generally never modify a server once it has been
-        deployed.  Instead we consider them to
-        be <q>throw-away</q>.  So for example to push a new release
-        we:
-        <ul>
-          <li>Use a deployment script to spin-up new back-end
-            servers in the cloud, to initialize it with all the
-            required system software, to install our software, and
-            to start it running.</li>
-          <li>Attach the new back-end servers to the load balancer,
-            and make sure they are working OK.</li>
-          <li>Terminate (destroy) the old back-end servers.</li>
-        </ul>
-      </p>
-    </section>
-
-    <section>
-      <h3>Clusters</h3>
-      
-      <p>Each cluster in the cloud consists of a load balancer and
-        a set of back-end servers operating in parallel.  As usage of
-        the different clusters grows and shrinks over time, back-end
-        servers can be <q>spun up</q> and <q>spun down</q>.</p>
-      
-      <p>We use the security features of the cloud to isolate
-        each cluster from the other, so that for example each
-        back-end server can only be accessed from its load
-        balancer.</p>
-      
-      <p>The Storage cluster is a special case:
-        <ul>
-          <li>Unlike other clusters the back-end servers to not
-            operate independently in parallel.  Instead
-            back-ends <q>gossip</q> amongst themselves to replicate
-            data.  We must configure the security group to allow
-            communication between these peers.</li>
-          <li>Unlike the other clusters it is not stateless: each
-            node has some attached disk storage. (Its whole point is
-            to be store state.)  So unlike the other clusters we
-            cannot willy-nilly add and remove back-end servers.
-            However, one of the advantages of using Riak as our data
-            store is that, as long as we do it slowly enough we can
-            carefully add and remove back-end servers, and the
-            cluster will self-adapt and redistribute the replicated
-            data appropriately.</li>
-        </ul>
-      </p>
-      
-    </section>
 
     <section>
       <img class="slide" src="img/ui-remote.png"/>
-      <h3>UI Code Statically Hosted</h3>
-      <p>The UI Code is JavaScript (plus HTML5 and CSS) hosted
-      statically.</p>
+      <h3>Ultimate Scalability</h3>
+      <p>The UI Code is <em>JavaScript</em> (plus HTML5 and CSS)</p>
+      <p>hosted <em>statically</em></p>
+      <p>Code runs in the user's browser using <em>user's CPU</em></p>
     </section>
     
     
     <section>
-      <h3>Remote vs. Local UI Code</h3>
-      
-      <p>In our original web-based version of HP Clipper, we
-        deployed the user interface code to static storage in the
-        cloud (initially S3 on Amazon, now migrating to HP object
-        storage). We configured a world-wide content distribution
-        network to replicate this UI code to edge locations
-        geographically close to the user's browser.</p>
-
-      <p>Note that the JavaScript is doing <q>cross origin</q> AJAX
-        calls, which is forbidden by default by JavaScript
-        security settings.  However, by adding special <q>CORS</q>
-        HTTP headers to the API server we can permit these calls
-        (at least on <q>modern</q> browsers&emdash;on older
-        browsers we use various hacks with iframes that give us
-        the same effect.</p>
-
-      <p>When a user invokes our UI for the first time (or for
-        the first time for a while), there are two sets of network
-        accesses:<ol>
-          <li>Download the code from the CDN.  This includes the
-            HTML, the CSS, the fonts, and the JavaScript.</li>
-          <li>The JavaScript code makes AJAX network accesses to
-            the elastic cloud.</li>
-        </ol>
-        
-      </p>
-
-      <p>To eliminate the latency of the first set of calls, we
-        have also built a system in which the UI code is stored
-        locally on the same computer as the browser.  This makes the
-        scrapbooks application feel like it is built into the
-        browser.  With the addition of aggressive caching of the
-        data from the API server, we can greatly improve the user
-        experience in the case of unreliable network
-        communication.</p>
-
-    </section>
-
-    <section>
-      <h2>API Server</h2>
-      <img class="slide" src="img/api-server.png"/>
-    </section>
-
-    <section>
-      <h2>Software Architecture</h2>
-
-      <h3>UI Code</h3>
-
-      Our UI is HTML5/CSS/JavaScript, where we write our code in
-      Coffeescript (which gets compiled into JavaScript).
-
-      <h3>API Server</h3>
-
-      <p>We built the API server on top of the Play Framework,
-        coding in Java.  This framework is more lightweight than
-        traditional J2EE Java frameworks, allowing for rapid
-        development and efficient operation.  The framework supports
-        a typical web <em>model-view-controller</em> pattern, but in
-        fact we only use the <em>model</em> and <em>controller</em>
-        parts.  In our case we implement the view on the client in
-        JavaScript <em>view</em>.</p>
-
-      <h3>Java Compute</h3>
-
-      <p>We also built the Java Compute servers on top of the Play
-        Framework.  It follows the <em>Web thunk</em> pattern, which
-        is a very simple GET-only REST pattern where each call is a
-        URL that make take other URLs as parameters. To avoid URLs
-        growing without bound, and allowing arbitrary functional web
-        service composition, the URLs redirect to a shortened URL
-        that is a function of the original arguments. </p>
-
-      <h3>Native Compute</h3>
-
-      <p>For some desired Web thunks it was easier to implement
-        them in native code.  One example is using headless Webkit
-        to render web pages. So we created a second compute cluster
-        that hosts Apache/PHP wrappers around native code, with a
-        container that conforms to the Web thunk pattern.</p>
-
-    </section>
-
-    <section>
-      <h2>Modules</h2>
-      <img class="slide" src="img/modules.png"/>
-    </section>
-
-    <section>
-      <h2>Code Modules</h2>
-
-      <p>Here we list only the modules in the core part of
-        Clipper, shared by the various front-ends.  This code is in
-        the Labs Subversion repository under the
-        URL <a href="https://svnpa1.hpl.hp.com/svnroot/miul/">https://svnpa1.hpl.hp.com/svnroot/miul</a>
-        (accessible only to project members).  The following module
-        paths are relative to this path.</p>
-
-      <dl>
-        <dt>tweb/branches/epc/clippings</dt> <dd>is the Java code
-          for the REST API server, built on top of the Play
-          Framework.  You use the <code>play</code>
-          command to run the server.</dd>
-
-        <dt>tweb/branches/epc/api-js-client</dt><dd>is the
-          Coffeescript code for JavaScript API wrapper around the
-          clipping REST API.  You use the <code>make</code> command
-          to build the project, and package it for inclusion in
-          other modules.</dd>
-
-        <dt>tweb/branches/epc/jsmags</dt><dd>is the Coffeescript
-          code for the scrapbooks UI.  You use the <code>make</code>
-          command to build the project, and package it for
-          deployment.</dd>
-
-        <dt>tweb/branches/epc/zh_button</dt><dd>is the
-          Coffeescript code for the clipping actions UI.  You use
-          the <code>make</code> command to build the project, and
-          package it for deployment.</dd>
-
-        <dt>tweb-deploy/trunk/funshort</dt><dd>is the Java code
-          for the Java compute server, built on top of the Play
-          Framework, and which uses a <em>functional URL
-            shortening</em> Web Thunk pattern.  In particular this
-          server is a container for Java Web thunks. You use
-          the <code>play</code> command to run the server.</dd>
-
-        <dt>platform/trunk/funshortplugins</dt><dd>is the Java
-          code for individual Web thunks executed by the compute
-          server. You use the <code>ant</code> command
-          to build the JAR file to be added to the funshort module.</dd>
-
-        <dt>platform/trunk/webthunk-sdk</dt><dd>is the Java
-          code implementing that Java Web thunks follow. You use
-          the <code>ant</code> command to build the JAR file to be
-          added to the funshort and funshortplugins modules.</dd>
-
-        <dt>platform/trunk/keyval</dt><dd>is the Java code
-          implementing a simple abstract API for a key-value store,
-          and a concrete implementation that is a wrapper around the
-          Riak distributed store, used as our storage cluster. You
-          use the <code>ant</code> command to build the JAR file to
-          be added to the clippings modules.</dd>
-
-        <dt>platform/trunk/webthunk-php</dt><dd>is the PHP
-          code and supporting scripts for the native Web thunks and
-          the container that runs them.  Copying this code to an
-          Apache server turns it into a native compute server.</dd>
-
-        <dt>tweb/branches/epc/etl-fetch</dt><dd>is the Java code
-          for a command-line daemon that continuously runs an
-          extract-transform-load process that extracts events from
-          the analytics queue and inserts them into a Vertica
-          analytics database.  You use the <code>ant</code> command
-          to build and run the daemon.</dd>
-
-        <dt>tweb/branches/epc/analydash</dt><dd>is the Java and
-          Coffescript code for the analytics dashboard.  You
-          use <code>make</code> to build the JavaScript
-          and <code>play</code> to run the server. </dd>
-
-        <dt>tweb-deploy/trunk/epc-AWS</dt><dd>contains the
-          scripts for deploying code to Amazon Web Services.  You
-          use the interactive <code>./DEPLOY</code> script to
-          generate the command lines for executing the various
-          deployment scripts.</dd>
-
-        <dt>tweb-deploy/trunk/epc-hpcloud</dt><dd>contains the
-          scripts for deploying code to HP Cloud.  You
-          use the interactive <code>./DEPLOY</code> script to
-          generate the command lines for executing the various
-          deployment scripts.</dd>
-
-        <dt>tweb-deploy/trunk/AWS-thunks</dt><dd>contains the
-          deployment scripts for the Java compute
-          servers. You use the <code>./DEPLOY</code> over in the
-          epc-AWS directory to generate the command lines.</dd>
-
-
-        <dt>tweb-deploy/trunk/AWS-thunks-php</dt><dd>contains the
-          deployment scripts for the LAMP compute servers.</dd>
-
-
-
-
-      </dl>
-    </section>
-    
-    <section>
-      <h2>Credits</h2>
-
-      <h3>Technology</h3>
-
-      <p>Many scores of people have contributed to the technology
-      behind Clipper or were part of the effort to bring it to the
-      public.  They include Yi Li, SukHwan Lim, Qian Lin, Jerry Liu,
-      Peter Shanley, Xuan Zhou</p>
-      
-      <h3>Photo Credits (Creative Commons)</h3>
+      <h2>Modeling Usage and Projecting Cost</h2>
+      <img class="slide" src="img/model.png"/>
       <ul>
-        <li><cite>LOGO2.0 part I and II by Ludwig Gatzke</site></li>
-        <li><cite>Melbourne Sound Relief - Raincoat Brigade by alexkess</site></li>
+        <li>Identify important parameters to monitor</li>
+        <li>Just a starting point</li>
+        <li>need to add networking cost</li>
+        <li>need to account for skewed distributions</li>
       </ul>
     </section>
+
+
+    <section>
+      <img class="slide" src="img/arch-comp.png"/>
+      <h2>Putting it all together</h2>
+      <ul>
+        <li><em>API Cluster</em>central API</li>
+        <li><em>Storage Cluster</em> NoSQL</li>
+        <li><em>Compute Clusters</em>stateless</li>
+        <li><em>Clipping and Scrapbooks UI</em> clip action and
+        scrapbook browsing</li>
+      </ul>
+    </section>
+
+
+    <section>
+      <h3>Software Stack</h3>
+
+      <p>We picked the <em>Open Source</em> stack of Linux and Java,
+      because of developer familiarity, avoidance of purchasing
+      bureaucracy, and availability of cutting-edge technologies.</p>
+
+      <p>Others might have chosen the <em>Microsoft</em> stack if
+      their developers were from that culture and they valued the
+      better tooling and clarity in technology choices.</p>
+
+    </section>
+
+
+    <section>
+      <h3>Software Architecture</h3>
+      <ul>
+        <li><strong>UI Code</strong> in HTML5/CSS and Coffeescript compiled
+        into JavaScript on JQuery framework</li>
+      <li><strong>API Server</strong> in Java on Play Framework (more
+        lightweight than J2EE)</li>
+      <li><strong>Java Compute</strong> is Play Framework,
+        container for Java web thunks.</p>
+      <li><strong>Native Compute</strong> is Apache/PHP container for
+      native web thunks.</p>
+      </ul>
+    </section>
+
+
+    <section data-contain="modules.png">
+    </section>
+
+
+    <section>
+      <h3>API Server</h3>
+      <img class="slide" src="img/api-server.png"/>
+      <p>Just <em>model</em> and <em>controller</em></p>
+    </section>
+
+
+    <section>
+      <h2>Agile Development</h2>
+      Scrum
+      <ul>
+        <li>Product Owner, Scrum Master </li>
+        <li>Work driven by user stories</li>
+        <li>Estimate in story points</li>
+        <li>Measure velocity</li>
+        <li>Daily stand-ups</li>
+        <li>Two-week Sprints</li>
+      </ul>
+      <br/>
+      Engineering Practices
+      <ul>
+        <li>Full-Stack Dev/Ops Team</li>
+        <li>Test-Driven Development</li>
+        <li>Continuous Integration</li>
+        <li>Fearless Refactoring</li>
+        <li>Shippable anytime</li>
+      </ul>
+
+    </section>
     
+
+    <section>
+      <h2>Credits</h2>
+      <p>Many scores of people have contributed to the technology
+        behind Clipper or were part of the effort to bring it to the
+        public.  They include Yi Li, SukHwan Lim, Qian Lin, Jerry Liu,
+        Peter Shanley, Xuan Zhou</p>
+      <p>You can try it
+        at <a href="http://www.hpclipper.com/">http://www.hpclipper.com/</a></p>
+      <p><small>Photo Credits (Creative Commons):
+        <cite>LOGO2.0 part I and II by Ludwig Gatzke</cite>, and
+        <cite>Melbourne Sound Relief - Raincoat Brigade by alexkess</cite>
+      </small></p>
+    </section>
+    
+
     <!-- End slides. -->
-    
-    
+
+
     <!-- Begin extension snippets. Add or remove as needed. -->
-    
+
     <!-- deck.navigation snippet -->
     <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
     <a href="#" class="deck-next-link" title="Next">&#8594;</a>
-    
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
       /
       <span class="deck-status-total"></span>
     </p>
-    
+
     <!-- deck.goto snippet -->
     <form action="." method="get" class="goto-form">
       <label for="goto-slide">Go to slide:</label>
@@ -474,17 +340,17 @@
       <datalist id="goto-datalist"></datalist>
       <input type="submit" value="Go">
     </form>
-    
+
     <!-- deck.hash snippet -->
     <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
-    
+
     <!-- End extension snippets. -->
-    
-    
+
+
     <!-- Required JS files. -->
     <script src="jquery-1.7.2.min.js"></script>
     <script src="core/deck.core.js"></script>
-    
+
     <!-- Extension JS files. Add or remove as needed. -->
     <script src="core/deck.core.js"></script>
     <script src="extensions/hash/deck.hash.js"></script>
@@ -496,6 +362,6 @@
     <script src="extensions/bg/deck.bg.js"></script>
 
     <script src="index.js"></script>
-    
+
   </body>
 </html>

@@ -1,23 +1,33 @@
 
 
 $fallback: #EEE;
-$grad: $fallback, rgba(240,240,240,0.9);
+/*$grad: $fallback, rgba(240,240,240,0.9);*/
+$grad: rgba(255,255,255,0.8), rgba(255,255,255,0.8);
 $rad: 50%;
 
 div.over-background {
-  padding: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
-  /*background-color: $fallback;*/   /* fallback color if gradients are not supported */
-  background-image: -webkit-linear-gradient(top,$grad); /* For Chrome and Safari */
-  background-image:    -moz-linear-gradient(top,$grad); /* For old Fx (3.6 to 15) */
-  background-image:     -ms-linear-gradient(top,$grad); /* For pre-releases of IE 10*/
-  background-image:      -o-linear-gradient(top,$grad); /* For old Opera (11.1 to 12.0) */
-  background-image:         linear-gradient(to bottom,$grad); /* Standard syntax; must be last */
-     -moz-border-radius: $rad;
-  -webkit-border-radius: $rad;
-          border-radius: $rad;
-     -moz-box-shadow: 10px 10px 5px #888;
-  -webkit-box-shadow: 10px 10px 5px #888;
-          box-shadow: 10px 10px 5px #888;
+
+    h3 {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    padding: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    /*background-color: $fallback;*/   /* fallback color if gradients are not supported */
+    /*background-image: -webkit-linear-gradient(top,$grad); /* For Chrome and Safari */
+    background-image:    -moz-linear-gradient(top,$grad); /* For old Fx (3.6 to 15) */
+    background-image:     -ms-linear-gradient(top,$grad); /* For pre-releases of IE 10*/
+    background-image:      -o-linear-gradient(top,$grad); /* For old Opera (11.1 to 12.0) */
+    background-image:         linear-gradient(to bottom,$grad); /* Standard syntax; must be last */
+       -moz-border-radius: $rad;
+    -webkit-border-radius: $rad;
+            border-radius: $rad;
+       -moz-box-shadow: 10px 10px 5px #888;
+    -webkit-box-shadow: 10px 10px 5px #888;
+            box-shadow: 10px 10px 5px #888;
+
+            
+          
 }

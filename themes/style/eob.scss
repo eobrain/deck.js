@@ -134,11 +134,13 @@
             color:#888;
         }
 
-        strong {
-            font-family: BebasNeueRegular, serif;
+        h4 {
+            font-family: BebasNeueRegular, sans-serif;
         }
 
-        em {
+        strong, em {
+            display: block;
+            font-size: 110%;
             font-family: BebasNeueRegular, serif;
         }
 
@@ -185,6 +187,26 @@
     }
     
     > .slide {
+
+        /* Turn bullet lists into floating text areas. */ 
+        > ul {
+            color:#c00;
+            padding: 0;
+            margin: 0;
+            > li {
+                list-style-type: none;
+                width: 25%;
+                float: left;
+                margin:0;
+                padding:3%;
+            }
+        }
+        blockquote, ul, ol, p, h2, h3, br {
+            clear: left;
+        }
+
+
+
         padding: 0 48px;
         background:#fff;
         .deck-before, .deck-previous {
@@ -229,4 +251,9 @@
             background:#ddf;
         }
     }
+    small {
+        font-size: 40%;
+        
+    }
 }
+

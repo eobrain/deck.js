@@ -1,5 +1,7 @@
 DIRS=. extensions/toc  extensions/bg
 
+I=img
+
 #Compile Coffee and scss
 build: graphviz
 	set -x; for dir in $(DIRS); do\
@@ -15,7 +17,13 @@ watch: graphviz
 	done
 	sass --style compressed  --watch .
 
-graphviz: img/arch-comp.png img/cluster.png img/deploy.png img/riak.png img/ui-remote.png img/ui-local.png img/api-server.png img/modules.png
+graphviz: $I/arch-comp.png $I/cluster.png $I/deploy.png $I/riak.png $I/ui-remote.png $I/ui-local.png $I/api-server.png $I/modules.png $I/model.png
 
 %.png: %.dot
-	dot -Tpng $< -o $@
+	cd img; dot -Tpng ../$< -o ../$@
+
+$I/arch-comp.png: $I/cluster.png_icon $I/riak.png_icon
+$I/deploy.png:    $I/cluster.png_icon
+
+%.png_icon: %.png
+	convert -resize 100 $< $@

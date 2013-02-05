@@ -1,0 +1,54 @@
+digraph G {
+
+        rankdir=LR
+
+        {
+        node[shape=plaintext, fontcolor="/dark23/1"]
+        
+        R  [label="clip/(user month)"]
+        S  [label="MB/clip"]
+        T  [label="CPUsec/clip"]
+        B  [label="sec/day\nbrowsing\nscrapbooks"]
+        C  [label="simultaneaous users/CPU"]
+        K  [label="skew\npeak use / mean use"]
+        }
+
+        node[shape=record]
+
+        u  [label="User\nGrowth\nModel"]
+        r  [label="Clipping Rate|(clip/month)|r[i] = R * u[i]"]
+        c  [label="Stored Clips|(MB)|c[i] = c[i-1] + r[i]"]
+        s  [label="Total Storage\nfor Clip|s(i) = S * c(i)"]
+        mc [label="Required CPU\nfor clipping|(CPUmonths/month)|mc[i] = T * r[i]"]
+        b  [label="simultaneous\nscrapbook\nusers|b[i] - B * u[i]"]
+        ms [label="Required\nCPUs for\nScrapbooks|ms[i] = b[i] / C"]
+        m  [label="Total Peak\n#CPUs\nrequired|K * (mc[i] + ms[i])"]
+
+        u -> r 
+        R -> r [label=R]
+
+        r -> c  
+        c -> c 
+
+        c -> s 
+        S -> s [label=S]
+
+        r -> mc
+        T -> mc [label=T]
+
+        u -> b 
+        B -> b [label=B]
+
+        b -> ms
+        C -> ms [label=C]
+
+        mc -> m
+        ms -> m
+        K  -> m [label=K]
+
+        node[shape=plaintext, label=""]
+        edge[fontcolor="/dark23/2"]
+        s -> " s" [label=s]
+        m -> " m" [label=m]
+
+}
