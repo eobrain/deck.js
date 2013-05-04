@@ -4,15 +4,11 @@
   right: 5px;
   color: #888;
   z-index: 3;
-  margin: 0;
-}
+  margin: 0; }
 
 body.deck-container .deck-status {
-  position: fixed;
-}
+  position: fixed; }
 
 @media print {
   .deck-status {
-    display: none;
-  }
-}
+    display: none; } }
