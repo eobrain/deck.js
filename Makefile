@@ -1,4 +1,6 @@
 DIRS=. extensions/toc  extensions/bg
+BUCKET=ei2013-clipper.eamonn.org
+REGION=us-west-1
 
 I=img
 
@@ -27,3 +29,16 @@ $I/deploy.png:    $I/cluster.png_icon
 
 %.png_icon: %.png
 	convert -resize 100 $< $@
+
+s3: build
+	git log > HISTORY.txt
+	s3cmd --config=s3.config '--add-header=Cache-Control:public, max-age=3600' --acl-public --exclude=\*~ sync . s3://$(BUCKET)
+	: view website at http://$(BUCKET).s3-website-$(REGION).amazonaws.com
+
+config:
+	:
+	: Go key Access Key ID and Secret Access Key go to
+	:    https://portal.aws.amazon.com/gp/aws/securityCredentials
+	:
+	s3cmd --config=s3.config --configure
+
